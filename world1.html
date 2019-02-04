@@ -2,7 +2,7 @@
   <head>
     <title> Neverwinter </title>
      <style>
-      .plat { background: green; position: absolute; border-radius: 8px; border: solid grey 2px; transition: 0.5s;}
+      .plat { background: firebrick; position: absolute; border-radius: 8px; border: solid grey 2px; transition: 0.5s;}
       .wind { background: #ddd; position: absolute; border-radius: 20px; opacity: 0.3}
       .coin { background: gold; position: absolute; border-radius: 40px; border: solid brown 2px; width: 30px; height: 30px; opacity: 0.3}
       .defeated { width: 0px !important; height: 0px !important; transition: 0.1s; }
@@ -262,34 +262,34 @@
               } else {
                 console.log("unknown command: " + this.command)
               }
-            }  // end "not dead"
           }  // end decideAction
           
-          makeRock(dx) {
-            let rockelement = document.createElement("div");
-            rockelement.classList.add('rock');
-            rockelement.classList.add('solid');
-            bg.appendChild(rockelement);
-            let rock = new Rock(this.x+30, this.y, "", rockelement); 
-            rock.dy = -15;
-            rock.dx = dx;
-          }
-          displayAction() {
-            if (this.progressBar === undefined) {
-              this.progressBar = document.createElement("div");
-              this.progressBar.classList.add("bar");
-              bg.appendChild(this.progressBar);
-              let span = document.createElement("span");
-              this.progressBar.appendChild(span);
-            }
-            if (this.element.classList.contains("defeated")) {
-              this.progressBar.style.display = "none";
-            } else {
-              this.progressBar.style.display = "";
-              this.progressBar.firstChild.style.width = ((this.hp / 150) * 100) + "%";
-              this.progressBar.style.left = this.x + "px";
-              this.progressBar.style.top = this.y - 20 + "px";
-            }
+              makeRock(dx) {
+                let rockelement = document.createElement("div");
+                rockelement.classList.add('rock');
+                rockelement.classList.add('solid');
+                bg.appendChild(rockelement);
+                let rock = new Rock(this.x+30, this.y, "", rockelement); 
+                rock.dy = -15;
+                rock.dx = dx;
+              }
+              displayAction() {
+                if (this.progressBar === undefined) {
+                  this.progressBar = document.createElement("div");
+                  this.progressBar.classList.add("bar");
+                  bg.appendChild(this.progressBar);
+                  let span = document.createElement("span");
+                  this.progressBar.appendChild(span);
+                }
+                if (this.element.classList.contains("defeated")) {
+                  this.progressBar.style.display = "none";
+                } else {
+                  this.progressBar.style.display = "";
+                  this.progressBar.firstChild.style.width = ((this.hp / 150) * 100) + "%";
+                  this.progressBar.style.left = this.x + "px";
+                  this.progressBar.style.top = this.y - 20 + "px";
+                }
+            } // end undefeated
           }
         }  
     ///end Player class
