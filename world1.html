@@ -154,8 +154,10 @@
         }
         
         class Player extends Sprite {
-          if (this.state != "defeated") {
-            decideAction() {
+          decideAction() {
+              if (this.state == "defeated") {
+                return;
+              }
               if (this.command == "go left") {
                 console.log("left");
                 this.dx -= 1.25;
@@ -262,7 +264,7 @@
               } else {
                 console.log("unknown command: " + this.command)
               }
-            }  // end decideAction
+          }  // end decideAction
           
               makeRock(dx) {
                 let rockelement = document.createElement("div");
@@ -289,7 +291,6 @@
                   this.progressBar.style.left = this.x + "px";
                   this.progressBar.style.top = this.y - 20 + "px";
                 }
-          } // end undefeated
         }  
     ///end Player class
         class Enemy extends Sprite {
