@@ -573,6 +573,12 @@
             alert ("Controls: W = jump, A = go left, D = go right, K = attack, F =  force push, arrow keys = tutorial");
           } else if (e.key == "/") {
             player2.command = "push";
+          } else if (e.key == ",") {
+            console.log("throwRock");
+            player2.command = "throwLeft";
+          } else if (e.key == ".") {
+            console.log("throwRock);
+           player2.command = “throwRight”;
           }
         });
                                   
@@ -600,6 +606,10 @@
             player1.command = "wait";
           } else if (e.key == "?") {
             player1.command = "wait";
+          } else if (e.key == ",") {
+            player2.command = "wait";
+          } else if (e.key == ".") {
+            player2.command = "wait";
           }
         });
         
