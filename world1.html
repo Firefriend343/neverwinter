@@ -155,7 +155,7 @@
         
         class Player extends Sprite {
           decideAction() {
-              if (this.state == "defeated") {
+              if (this.hp <= 0) {
                 return;
               }
               if (this.command == "go left") {
