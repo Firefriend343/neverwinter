@@ -694,13 +694,13 @@
             player.element.className = 'defeated';
             player.state = "defeated"
             window.setTimeout(function () {
-              if (player = player1 || player = player2) {
+              if (player == player1 || player == player2) {
                 player.element.className = 'solid player';
                 player.state = "normal";
                 player.hp = 150;
                 player.gold = player.gold - 5;
               }
-              if (player = rival1) {
+              if (player == rival1) {
                 player.element.className = 'solid rival';
                 player.state = "normal";
                 player.hp = 100;
