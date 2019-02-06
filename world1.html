@@ -2,7 +2,7 @@
   <head>
     <title> Neverwinter </title>
      <style>
-      .plat { background: silver; position: absolute; border-radius: 8px; border: solid grey 2px; transition: 0.5s;}
+      .plat { background: purple; position: absolute; border-radius: 8px; border: solid grey 2px; transition: 0.5s;}
       .wind { background: #ddd; position: absolute; border-radius: 20px; opacity: 0.3}
       .coin { background: gold; position: absolute; border-radius: 40px; border: solid brown 2px; width: 30px; height: 30px; opacity: 0.3}
       .defeated { width: 0px !important; height: 0px !important; transition: 0.1s; }
@@ -21,8 +21,8 @@
     <img id="player1" class="solid player" src="final-aurum-pixilart.png" style="position:absolute;" width=42.5 height=75>
     <img id="player2" class="solid player" src="argentum-ii-pixilart.png" style="position:absolute;" width=42.5 height=75>
     <img id="enemy1" class="solid enemy" src="neverwinterenemy.png" style="position:absolute; left:1100px; top:250px"width=80 height=80>
-    <!-- img id="enemy2" class="solid enemy" src="magic-carpet-animation-pixilart.gif" style="position:absolute; left:2800px; top:250px"width=40px height=40px>
-    <img id="enemy3" class="solid enemy" src="pixil-frame-0 (1).png" style="position:absolute; left:2800px; top:250px"width=40px height=40px>
+    <img id="rival2" class="solid rival" src="neverwinterenemy.png" style="position:absolute; left:2800px; top:250px"width=80 height=80>
+    <!--- img id="enemy3" class="solid enemy" src="pixil-frame-0 (1).png" style="position:absolute; left:2800px; top:250px"width=40px height=40px>
     <img id="enemy4" class="solid enemy" src="dasher-pixilart (1).png" style="position:absolute; left: 3700px; top: 600px"width=30px height=28px>
     <img id="enemy5" class="solid enemy" src="totality-pixilart.png" style="position:absolute; left : 3700px; top: 800px"width=120px height=120px>
     -->
@@ -341,6 +341,51 @@
             }
           }
         }
+        class Rival extends Sprite {
+          decideAction() {
+            if (Math.random() < 0.1 && this.dy > -1 && this.dy < 1) {
+              this.dy -= 15;
+              this.state = "jump!";
+            } else if (this.x > player2.x + player2.width + 3) {
+              this.ax = -1;
+              this.facing = -1;
+              this.element.style.transform = "scaleX(1)";
+            } else if (this.x + this.width < player2.x - 3) {
+              this.ax = 1;
+              this.facing = 1;
+              this.element.style.transform = "scaleX(-1)";
+            } else {
+              console.log ("attack player")
+              let victim_el = collision(this.x + this.width +5, this.y + this.height/2, this, "player",5 ,5);
+              if (this.facing == -1) {
+                victim_el = collision(this.x - 10, this.y + this.height/2, this, "player", 5 ,5);
+              }
+              if (victim_el) { 
+                let victim = victim_el.sprite;
+                victim.hp -= this.damage;
+                victim.dx += this.knockback * this.facing;
+              }
+              this.state = "attacking";
+            }
+          }
+          displayAction() {
+            if (this.progressBar === undefined) {
+              this.progressBar = document.createElement("div");
+              this.progressBar.classList.add("bar");
+              bg.appendChild(this.progressBar);
+              let span = document.createElement("span");
+              this.progressBar.appendChild(span);
+            }
+            if (this.element.classList.contains("defeated")) {
+              this.progressBar.style.display = "none";
+            } else {
+              this.progressBar.style.display = "";
+              this.progressBar.firstChild.style.width = ((this.hp / 100) * 100) + "%";
+              this.progressBar.style.left = this.x + "px";
+              this.progressBar.style.top = this.y - 20 + "px";
+            }
+          }
+        }
         
     
         class Rock extends Sprite {
@@ -406,6 +451,7 @@
             player1.makeCoin(500, 600);
 
             let enemy1 = new Enemy(300, 180, "enemy1");
+            let rival1 = new Rival(300, 180, "rival");
             
           } else if (levelNum == 2) {
             player1.x = 100;
@@ -643,12 +689,19 @@
             player.element.className = 'defeated';
             player.state = "defeated"
             window.setTimeout(function () {
-               if (player == player1 || player == player2){
+               if (player == player1 || player == player2) {
                 player.element.className = 'solid player';
                 player.state = "normal";
                 player.hp = 150;
                 player.gold = player.gold - 5;
                }
+              if (player == rival1) {
+                player.element.className = 'solid rival';
+                player.state = "normal";
+                player.hp = 100;
+                player.gold = player.gold - 5;
+                player.makeCoin(Math.random() * 800, 30);
+              }
                else {
                  //for enemy
                 player.element.className = 'solid enemy';
