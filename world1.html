@@ -2,7 +2,7 @@
   <head>
     <title> Neverwinter Level 1 </title>
      <style>
-      .plat { background: silver; position: absolute; border-radius: 8px; border: solid grey 2px; transition: 0.5s;}
+      .plat { background: khaki; position: absolute; border-radius: 8px; border: solid grey 2px; transition: 0.5s;}
       .wind { background: #ddd; position: absolute; border-radius: 20px; opacity: 0.3}
       .coin { background: gold; position: absolute; border-radius: 40px; border: solid brown 2px; width: 30px; height: 30px; opacity: 0.3}
       .defeated { width: 0px !important; height: 0px !important; transition: 0.1s; }
@@ -298,6 +298,13 @@
                   this.progressBar.style.top = this.y - 20 + "px";
                 }
               }
+              
+              respawn() {
+                this.element.className = 'solid player';
+                this.state = "normal";
+                this.hp = 150;
+                this.gold = this.gold - 5;
+              }
         }  
     ///end Player class
     
@@ -345,6 +352,13 @@
               this.progressBar.style.top = this.y - 20 + "px";
             }
           }
+          
+          respawn() {
+            this.element.className = 'solid enemy';
+            this.hp = 100; 
+            this.state = "normal";
+            this.makeCoin(Math.random() * 800, 30);
+          }
         }
     
     
@@ -391,6 +405,14 @@
               this.progressBar.style.left = this.x + "px";
               this.progressBar.style.top = this.y - 20 + "px";
             }
+          }
+          
+          respawn() {
+            this.element.className = 'solid rival';
+            this.state = "normal";
+            this.hp = 100;
+            this.gold = this.gold - 5;
+            this.makeCoin(Math.random() * 800, 30);   
           }
         }
         
@@ -694,34 +716,14 @@
             player.element.className = 'defeated';
             player.state = "defeated"
             window.setTimeout(function () {
-              if (player == player1 || player == player2) {
-                player.element.className = 'solid player';
-                player.state = "normal";
-                player.hp = 150;
-                player.gold = player.gold - 5;
-              }
-              if (player == rival1) {
-                player.element.className = 'solid rival';
-                player.state = "normal";
-                player.hp = 100;
-                player.gold = player.gold - 5;
-                player.makeCoin(Math.random() * 800, 30);
-              }
-               else {
-                 //for enemy
-                alert ("error! this has not worked");
-                player.element.className = 'solid enemy';
-                player.hp = 100; 
-                player.state = "normal";
-                player.makeCoin(Math.random() * 800, 30);
-               }
-               player.x = player.spawnx;
-               player.y = player.spawny;
-               player.dx = 0;
-               player.dy = 0;
-               player.ax = 0;
-               player.ay = 0;
-               player.clinging = false;
+              player.respawn();
+              player.x = player.spawnx;
+              player.y = player.spawny;
+              player.dx = 0;
+              player.dy = 0;
+              player.ax = 0;
+              player.ay = 0;
+              player.clinging = false;
             }, 6000);
             player.hp = 100;
           } else if (player.hp > 150) {
