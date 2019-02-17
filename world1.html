@@ -19,7 +19,6 @@
     </style>
   </head>
 <body>
-  ///101 commits! Yay!
   <div id="bg" style="width:1300px; height:630px; background:white; border:2px solid black; margin: 2px;">
     <img id="player1" class="solid player" src="final-aurum-pixilart.png" style="position:absolute;" width=75 height=75>
     <img id="player2" class="solid player" src="argentum-ii-pixilart.png" style="position:absolute;" width=42.5 height=75>
@@ -884,7 +883,7 @@
           }
           
           let playerClasses = player.element.classList;
-          if (playerClasses.contains("player") || playerClasses.contains("target") {
+          if (playerClasses.contains("player") || playerClasses.contains("target")) {
             let touched_coin = collision(player.x, player.y, player, "coin");
             if (touched_coin) {
                 console.log("got coin");
