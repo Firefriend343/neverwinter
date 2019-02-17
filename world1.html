@@ -2,7 +2,7 @@
   <head>
     <title> Neverwinter Level 1 </title>
      <style>
-      .plat { background: yellow; position: absolute; border-radius: 8px; border: solid grey 2px; transition: 0.5s;}
+      .plat { background: gray; position: absolute; border-radius: 8px; border: solid grey 2px; transition: 0.5s;}
       .wind { background: #ddd; position: absolute; border-radius: 20px; opacity: 0.3}
       .coin { background: gold; position: absolute; border-radius: 40px; border: solid brown 2px; width: 30px; height: 30px; opacity: 0.3}
       .defeated { width: 0px !important; height: 0px !important; transition: 0.1s; }
@@ -24,8 +24,8 @@
     <img id="player2" class="solid player" src="argentum-ii-pixilart.png" style="position:absolute;" width=42.5 height=75>
     <img id="enemy1" class="solid enemy target" src="neverwinterenemy.png" style="position:absolute; left:1100px; top:250px"width=80 height=80>
     <img id="rival1" class="solid rival target" src="neverwinterenemy.png" style="position:absolute; left:1100px; top:500px"width=80 height=80>
-    <img id="hunter1" class="solid hunter" src="forest-ninja-pixilart.png" style="position:absolute; left:1100px; top:500px"width=50 height=75>
-    <!--- img id="enemy3" class="solid enemy target" src="pixil-frame-0 (1).png" style="position:absolute; left:2800px; top:250px"width=40px height=40px>
+    <!--- img id="hunter1" class="solid hunter" src="forest-ninja-pixilart.png" style="position:absolute; left:1100px; top:500px"width=50 height=75>
+    <img id="enemy3" class="solid enemy target" src="pixil-frame-0 (1).png" style="position:absolute; left:2800px; top:250px"width=40px height=40px>
     <img id="enemy4" class="solid enemy target" src="dasher-pixilart (1).png" style="position:absolute; left: 3700px; top: 600px"width=30px height=28px>
     <img id="enemy5" class="solid enemy target" src="totality-pixilart.png" style="position:absolute; left : 3700px; top: 800px"width=120px height=120px>
     -->
@@ -36,10 +36,11 @@
   <p id="player2_debug"></p>
   <p id="enemy1_debug"></p>
   <p id="rival1_debug"></p>
-  <p id ="hunter1_debug"></p>
+  <!--- p id ="hunter1_debug"></p>
   <p id="enemy3_debug"></p>
   <p id="enemy4_debug"></p>
   <p id="enemy5_debug"></p>
+-->
 
   
   <script>
@@ -419,59 +420,59 @@
           }
         }
     
-        class Hunter extends Sprite {
-          decideAction() {
-            if (Math.random() < 0.1 && this.dy > -1 && this.dy < 1) {
-              this.dy -= 15;
-              this.state = "jump!";
-            } else if (this.x > rival1.x + rival1.width) {
-              this.ax = -1;
-              this.facing = -1;
-              this.element.style.transform = "scaleX(-1)";
-            } else if (this.x + this.width < rival1.x) {
-              this.ax = 1;
-              this.facing = 1;
-              this.element.style.transform = "scaleX(1)";
-            } else {
-              console.log ("attack rival")
-              let victim_el = collision(this.x + this.width +5, this.y + this.height/2, this, "rival", 5 ,5);
-              if (this.facing == -1) {
-                victim_el = collision(this.x - 10, this.y + this.height/2, this, "rival", 5 ,5);
-              }
-              if (victim_el) { 
-                let victim = victim_el.sprite;
-                victim.hp -= this.damage;
-                victim.dx += this.knockback * this.facing;
-              }
-              this.state = "attacking";
-            }
-          }
-          displayAction() {
-            if (this.progressBar === undefined) {
-              this.progressBar = document.createElement("div");
-              this.progressBar.classList.add("bar");
-              bg.appendChild(this.progressBar);
-              let span = document.createElement("span");
-              this.progressBar.appendChild(span);
-            }
-            if (this.element.classList.contains("defeated")) {
-              this.progressBar.style.display = "none";
-            } else {
-              this.progressBar.style.display = "";
-              this.progressBar.firstChild.style.width = ((this.hp / 100) * 100) + "%";
-              this.progressBar.style.left = this.x + "px";
-              this.progressBar.style.top = this.y - 20 + "px";
-            }
-          }
+        //class Hunter extends Sprite {
+          //decideAction() {
+            //if (Math.random() < 0.1 && this.dy > -1 && this.dy < 1) {
+              //this.dy -= 15;
+              //this.state = "jump!";
+            //} else if (this.x > rival1.x + rival1.width) {
+              //this.ax = -1;
+              //this.facing = -1;
+              //this.element.style.transform = "scaleX(-1)";
+            //} else if (this.x + this.width < rival1.x) {
+              //this.ax = 1;
+              //this.facing = 1;
+              //this.element.style.transform = "scaleX(1)";
+            //} else {
+              //console.log ("attack rival")
+              //let victim_el = collision(this.x + this.width +5, this.y + this.height/2, this, "rival", 5 ,5);
+              //if (this.facing == -1) {
+                //victim_el = collision(this.x - 10, this.y + this.height/2, this, "rival", 5 ,5);
+              //}
+              //if (victim_el) { 
+                //let victim = victim_el.sprite;
+                //victim.hp -= this.damage;
+                //victim.dx += this.knockback * this.facing;
+              //}
+              //this.state = "attacking";
+            //}
+          //}
+          //displayAction() {
+            //if (this.progressBar === undefined) {
+              //this.progressBar = document.createElement("div");
+              //this.progressBar.classList.add("bar");
+              //bg.appendChild(this.progressBar);
+              //let span = document.createElement("span");
+              //this.progressBar.appendChild(span);
+            //}
+            //if (this.element.classList.contains("defeated")) {
+              //this.progressBar.style.display = "none";
+            //} else {
+              //this.progressBar.style.display = "";
+              //this.progressBar.firstChild.style.width = ((this.hp / 100) * 100) + "%";
+              //this.progressBar.style.left = this.x + "px";
+              //this.progressBar.style.top = this.y - 20 + "px";
+            //}
+          //}
           
-          respawn() {
-            this.element.className = 'solid hunter';
-            this.state = "normal";
-            this.hp = 100;
-            this.gold = this.gold - 5;
-            this.makeCoin(Math.random() * 800, 30);   
-          }
-        }
+          //respawn() {
+            //this.element.className = 'solid hunter';
+            //this.state = "normal";
+            //this.hp = 100;
+            //this.gold = this.gold - 5;
+            //this.makeCoin(Math.random() * 800, 30);   
+        //}
+      //}
         
     
         class Rock extends Sprite {
@@ -538,7 +539,7 @@
 
             let enemy1 = new Enemy(300, 180, "enemy1");
             let rival1 = new Rival(700, 480, "rival1");
-            let hunter1 = new Hunter(850, 500, "hunter1")
+            //let hunter1 = new Hunter(850, 500, "hunter1")
             
           } else if (levelNum == 2) {
             player1.x = 100;
