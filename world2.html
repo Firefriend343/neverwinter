@@ -207,12 +207,12 @@
                   forceY = this.y - 20;
                 }
                 this.makePush(forceX, forceY);
-                let victim_el = collision(forceX, forceY, this, "target", forceWidth, this.height + 20);
+                let victim_els = collisionAll(forceX, forceY, this, "target", forceWidth, this.height + 20);
               
-                if (victim_el) { 
+                for (let victim_el in victim_els) { 
                   let victim = victim_el.sprite;
                   victim.dx += 60 * this.facing;
-                  victim.dy -= 15;
+                  victim.dy -= Math.random() * 15 + 5;
                   if (victim_el == enemy1) {
                     victim.hp -= this.damage - 5;
                   }
@@ -981,6 +981,23 @@
           }
           return false;
         }
+    
+        function collisionAll(x, y, myself, opt_className, opt_width, opt_height) {
+          let result = [];
+          let width = opt_width || myself.width;
+          let height = opt_height || myself.height;
+          let solids = document.getElementsByClassName(opt_className || "solid");
+          for (let i = 0; i < solids.length; i++) {
+            let solid = solids[i];
+            if (solid != myself.element &&
+                overlaps(x, y, width, height, 
+                         solid.offsetTop, solid.offsetLeft, solid.offsetWidth, solid.offsetHeight)) {
+             result.push(solid); 
+            }
+          }
+          return result;
+        }
+    
         
         function overlaps(x, y, w, h, top, left, width, height) {
           let r = x + w;
