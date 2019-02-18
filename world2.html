@@ -213,12 +213,6 @@
                   let victim = victim_el.sprite;
                   victim.dx += 60 * this.facing;
                   victim.dy -= Math.random() * 15 + 5;
-                  if (victim_el == enemy1) {
-                    victim.hp -= this.damage - 5;
-                  }
-                  if (victim_el == rival1) {
-                    victim.hp -= this.damage - 5;
-                  }
                 }
                 console.log(victim_el)
               } else if (this.command == "jump") {
