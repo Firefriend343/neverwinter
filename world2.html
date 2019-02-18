@@ -209,7 +209,7 @@
                 this.makePush(forceX, forceY);
                 let victim_els = collisionAll(forceX, forceY, this, "target", forceWidth, this.height + 20);
               
-                for (let victim_el in victim_els) { 
+                for (let victim_el of victim_els) { 
                   let victim = victim_el.sprite;
                   victim.dx += 60 * this.facing;
                   victim.dy -= Math.random() * 15 + 5;
