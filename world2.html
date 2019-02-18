@@ -155,8 +155,14 @@
             setTimeout(function(){
               bg.removeChild(pushelement);
             }, 2000);
-            }
-        }
+          }
+          makeWind(x, y) {
+            let windelement = document.createElement("div");
+            windelement.classList.add('wind');
+            bg.appendChild(windelement);
+            windelement.style.top = y;
+            windelement.style.left = x;
+          }
         
         class Player extends Sprite {
           decideAction() {
