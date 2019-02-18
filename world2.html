@@ -156,13 +156,7 @@
               bg.removeChild(pushelement);
             }, 2000);
           }
-          makeWind(x, y) {
-            let windelement = document.createElement("div");
-            windelement.classList.add('wind');
-            bg.appendChild(windelement);
-            windelement.style.top = y;
-            windelement.style.left = x;
-          }
+          
         
         class Player extends Sprite {
           decideAction() {
@@ -539,8 +533,7 @@
             player1.makeCoin(350, 60);
             player1.makeCoin(500, 200);
             player1.makeCoin(500, 600);
-            player2.makeWind(1000, 200)
-
+            
             //let enemy1 = new Enemy(300, 180, "enemy1");
             //let rival1 = new Rival(700, 480, "rival1");
             //let hunter1 = new Hunter(850, 500, "hunter1")
