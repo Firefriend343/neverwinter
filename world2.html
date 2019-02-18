@@ -305,7 +305,7 @@
               }
               
               respawn() {
-                this.element.className = 'solid player';
+                this.element.className = 'solid player target';
                 this.state = "normal";
                 this.hp = 150;
                 this.gold = this.gold - 5;
@@ -533,6 +533,7 @@
             player1.makeCoin(350, 60);
             player1.makeCoin(500, 200);
             player1.makeCoin(500, 600);
+            player2.makeWind(1000, 200)
 
             //let enemy1 = new Enemy(300, 180, "enemy1");
             //let rival1 = new Rival(700, 480, "rival1");
