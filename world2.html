@@ -815,7 +815,7 @@
           }
           if (collision(player.x, player.y, player, "wind")) {
               player.dx -= 1;
-              player.dy += 1;
+              player.dy -= 2;
           }
           newx = newx + player.dx;
           let moving = (player.dx > 1 || player.dx < -1 ||
