@@ -911,7 +911,7 @@
                 console.log("got healstone");
                 console.log(player);
                 player.hp += 10;
-                touched_coin.parentNode.removeChild(touched_healstone);
+                touched_healstone.parentNode.removeChild(touched_healstone);
                 setTimeout(function () {
                   player.makeHealstone(Math.random() * 1200, 30) 
                 }, 6000);
