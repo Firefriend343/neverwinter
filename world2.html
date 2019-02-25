@@ -2,10 +2,11 @@
   <head>
     <title> Neverwinter Game Level 1 </title>
      <style>
-      .plat { background: green; position: absolute; border-radius: 8px; border: solid grey 2px; transition: 0.5s;}
+      .plat { background: war; position: absolute; border-radius: 8px; border: solid grey 2px; transition: 0.5s;}
       .wind { background: #00f; position: absolute; border-radius: 20px; opacity: 0.3}
-      .coin { background: gold; position: absolute; border-radius: 40px; border: solid brown 2px; width: 30px; height: 30px; opacity: 0.3}
+      .coin { background: gold; position: absolute; border-radius: 40px; border: solid brown 2px; width: 30px; height: 30px; opacity: 0.3}     
       .healstone { background: green; position: absolute; border-radius: 40px; border: solid black 2px; width: 30px; height: 30px; opacity: 0.3}
+      .warstone { background: red; position: absolute; border-radius: 40px; border: solid black 2px; width: 30px; height: 30px; opacity: 0.3}      
       .defeated { width: 0px !important; height: 0px !important; transition: 0.1s; }
       .rock { background: grey; position: absolute; border-radius: 10px; border: solid black 2px; width: 20px; height: 20px; opacity: 0.3}
       .enemy { transition: 0.1s; }
@@ -148,6 +149,7 @@
             coin.dy = -10;
             coin.dx = 0;
           }
+          
           makeHealstone(x, y) {
             let healstoneelement = document.createElement("div");
             healstoneelement.classList.add('healstone');
@@ -155,6 +157,15 @@
             let healstone = new Sprite(x, y, "", healstoneelement); 
             healstone.dy = -10;
             healstone.dx = 0;
+          }
+          
+          makeWarstone(x, y) {
+            let warstoneelement = document.createElement("div");
+            warstoneelement.classList.add('warstone');
+            bg.appendChild(warstoneelement);
+            let warstone = new Sprite(x, y, "", warstoneelement); 
+            warstone.dy = -10;
+            warstone.dx = 0;
           }
           
           makePush(x, y) {
@@ -534,7 +545,12 @@
           while (0 < healstones.length) {
             let healstone = healstones[0];
             bg.removeChild(healstone);
-            }
+          }
+          let warstones = document.getElementsByClassName("warstone");
+          while (0 < warstones.length) {
+            let warstone = warstones[0];
+            bg.removeChild(warstone);
+          }
           if (levelNum == 1) {
             player1.x = 100;
             player1.y = 100;   
@@ -543,7 +559,8 @@
             player1.makeCoin(350, 60);
             player1.makeCoin(500, 200);
             player1.makeCoin(500, 600);
-            player1.makeHealstone(300, 40)
+            player1.makeHealstone(300, 40);
+            player1.makeWarstone(400, 50);
             //let enemy1 = new Enemy(300, 180, "enemy1");
             //let rival1 = new Rival(700, 480, "rival1");
             //let hunter1 = new Hunter(850, 500, "hunter1")
@@ -560,8 +577,8 @@
             player1.makeCoin(530, 60);
             player1.makeCoin(500, 200);
             player1.makeCoin(500, 600);
-            player1.makeHealstone(300, 40)
-
+            player1.makeHealstone(300, 40);
+            player1.makeWarstone(400, 50);
         
           } else if (levelNum == 3) {
             player1.x = 100;
@@ -915,6 +932,18 @@
                 touched_healstone.parentNode.removeChild(touched_healstone);
                 setTimeout(function () {
                   player.makeHealstone(Math.random() * 1200, 30) 
+                }, 6000);
+            }
+          }
+          if (playerClasses.contains("player") || playerClasses.contains("target")) {
+            let touched_warstone = collision(player.x, player.y, player, "warstone");
+            if (touched_warstone) {
+                console.log("got warstone");
+                console.log(player);
+                player.damage += 1;
+                touched_warstone.parentNode.removeChild(touched_warstone);
+                setTimeout(function () {
+                  player.makeWarstone(Math.random() * 1200, 30) 
                 }, 6000);
             }
           }
