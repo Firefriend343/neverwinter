@@ -14,7 +14,7 @@
       .rival { transition: 0.1s; }
       .hunter { transition: 0.1s; }
       .player { transition: 0.08s; }
-      .push { background: orange; position: absolute; opacity: 0.5; width: 100px; height: 105px; transition: 0.1s; }
+      .push { background: blue; position: absolute; opacity: 0.5; width: 100px; height: 105px; transition: 0.1s; }
        #bg {transition: 0.2s; }
       .door { position: absolute }
       .bar { position: absolute; height: 6px; width: 85px; background: gray; border-radius: 5px; padding: 3px; }
@@ -566,6 +566,11 @@
             let warstone = warstones[0];
             bg.removeChild(warstone);
           }
+          let sunbursts = document.getElementsByClassName("sunburst");
+          while (0 < sunbursts.length) {
+            let sunburst = sunbursts[0];
+            bg.removeChild(sunburst);
+          }
           if (levelNum == 1) {
             player1.x = 100;
             player1.y = 100;   
@@ -748,7 +753,7 @@
           } else if (e.key == "/") {
             player2.command = "push";
           } else if (e.key == ",") {
-            console.log("throwRock");
+            console.log("throwg");
             player2.command = "throwLeft";
           } else if (e.key == ".") {
             console.log("throwRock");
@@ -802,7 +807,9 @@
             player1.command = "wait";
           } else if (e.key == "v") {
             player1.command = "wait";     
-          }  
+          } else if (e.key == "!") {
+            player1.command = "wait";
+          }
         });
         
         setInterval(function () {
