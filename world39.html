@@ -14,7 +14,7 @@
       .rival { transition: 0.1s; }
       .hunter { transition: 0.1s; }
       .player { transition: 0.08s; }
-      .push { background: blue; position: absolute; opacity: 0.5; width: 100px; height: 105px; transition: 0.1s; }
+      .push { background: green; position: absolute; opacity: 0.5; width: 100px; height: 105px; transition: 0.1s; }
        #bg {transition: 0.2s; }
       .door { position: absolute }
       .bar { position: absolute; height: 6px; width: 85px; background: gray; border-radius: 5px; padding: 3px; }
@@ -290,7 +290,7 @@
               } else if (this.command == "help") {
                 this.hp += 10;
               } else if (this.command == "sunburst") {
-                this.makeSunburst(0);
+                this.makeSunburst(+0);
                 this.state = "floating";
                 this.command = "wait";
                 this.clinging = false;
@@ -304,7 +304,7 @@
                 sunburstelement.classlist.add('sunburst');
                 bg.appendChild(sunburstelement);
                 let sunburst = new Sunburst(this.x, this.y, "", sunburstelement);
-                sunburst.dy = dy;
+                sunburst.dy = -0;
                 sunburst.dx = dx;
               }
               
