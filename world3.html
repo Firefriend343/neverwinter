@@ -13,7 +13,7 @@
       .rival { transition: 0.1s; }
       .hunter { transition: 0.1s; }
       .player { transition: 0.08s; }
-      .push { background: orange; position: absolute; opacity: 0.5; width: 100px; height: 105px; transition: 0.1s; }
+      .push { background: red; position: absolute; opacity: 0.5; width: 100px; height: 105px; transition: 0.1s; }
        #bg {transition: 0.2s; }
       .door { position: absolute }
       .bar { position: absolute; height: 6px; width: 85px; background: gray; border-radius: 5px; padding: 3px; }
@@ -328,7 +328,6 @@
                 this.element.className = 'solid player target';
                 this.state = "normal";
                 this.hp = 150;
-                this.gold = this.gold - 5;
               }
         }  
     ///end Player class
