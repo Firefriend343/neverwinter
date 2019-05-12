@@ -300,7 +300,7 @@
                 bg.appendChild(rockelement);
                 let rock = new Rock(this.x+30, this.y, "", rockelement); 
                 rock.dy = -15;
-                rock.dx = dx;
+                rock.dx = dx + this.dx;
               }
               displayAction() {
                 if (this.progressBar === undefined) {
